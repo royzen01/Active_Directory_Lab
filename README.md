@@ -47,9 +47,57 @@ The second virtual machine would host one test client device with an internally 
 
 - To begin the process of IP Addressing I navigated to `Network Connections` from within the `Control Panel`.
 - Since this VM has two different NICs I found the internal one and named it `INTERNAL` to make it easy to distinguish.
-- I then modified its TCP/IPv4 settings to the following
+- I then modified its TCP/IPv4 settings to the following.
 - <b>Note:</b> this NIC did not have a Default gateway because the DC itself will act as the Default Gateway for the private network. It will route traffic from the clients, through the internal NIC and then through the public facing NIC for internet connectivity.
 
 ![VBox 6](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/783d34dc-9e48-43ec-a0c1-74ba20148892)
+
+### Installing Active Directory 
+
+- Using Server Manager I installed the `Active Direcotry Domain Services` role.
+
+![VBox 7](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/93819c4c-5d44-4a95-968c-56277866e816)
+
+- Using AD DS I created a new domain named `mydomain.com`.
+
+![VBox 8](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/1262676c-767a-47e9-8431-55ab9a9e406a)
+
+- Once AD DS was set up, I created a new `Organizational Unit` named `_ADMINS`.
+- Here, I created an adminstrator account for myself (up to this point we had been using the default Administrator account).
+- I switched over to that account for the remainder of the project.
+
+![VBox 9](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/b4f81dba-7012-4919-8d02-2b2f0b9ac515)
+
+### Setting up RAS/NAT
+
+- Back in Server Manager, I added the `Remote Access` role and enabled `Routing` and `Remote Access Server (RAS)` on it.
+- The goal with installing NAT is to allow the clients to sit on a private network but have internet access via the DC.
+
+![VBox 10](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/088e6db0-8575-405e-8f59-f938aa1fd023)
+
+- I then configured the newly installed Remote Access role to enable Network Address Translation (NAT).
+  
+![VBox 11](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/ffb2c3f4-76a4-4352-8905-668311b75c3a)
+
+- I selected the public facing NIC to allow internet conectivity.
+
+![VBox 12](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/1ae18d80-fa89-44b9-a26f-3d5275ae7413)
+
+### Setting up DHCP
+
+- Back in Server Manager, I added installed a `DHCP Server` role.
+
+![VBox 13](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/a35aa082-1cfe-4a67-8b21-6ea271623a2e)
+
+- I created a new scope for mydomain.com between `172.16.0.100-200`
+- I set the Default Gateway as `172.16.0.1`. Again, this is the DC's IP Address and the DC will also server as the Default Gateway.
+
+![VBox 14](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/0fe5ac17-794c-492a-bfc9-357656bcb924)
+
+![VBox 15](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/6d802879-184f-488c-ac93-dc71498f5c73)
+
+![VBox 16](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/b74b6f72-9e89-4412-a394-a5022ff4c537)
+
+![VBox 17](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/276432ed-7190-4d6e-9e8f-ac6b811cbcde)
 
 
