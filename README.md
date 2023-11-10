@@ -10,7 +10,7 @@ The first virtual machine will be the Domain Controller (DC) and it will host Wi
 * <b> NAT: </b> NAT was used for connectivity to the clients as well as providing said clients access to the internet.
 * <b> DHCP: </b> A DHCP server will be needed in order to assign IP Addresses to each client.
 
-The second virtual machine would host one test client device with an internally connecting NIC. This client would be used to ensure the server is properly configured.
+The second virtual machine will run Windows 10. This VM will serve as a test client device and its NIC will connect to the private network. This client would be used to ensure the server is properly configured.
 
 ## Topology
 
@@ -99,5 +99,68 @@ The second virtual machine would host one test client device with an internally 
 ![VBox 16](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/b74b6f72-9e89-4412-a394-a5022ff4c537)
 
 ![VBox 17](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/276432ed-7190-4d6e-9e8f-ac6b811cbcde)
+
+### Adding users to AD
+
+- I used a PowerShell script and a text file with a list of names to automate the process of adding users to Active Directory. This added 1k+ users to the domain.
+
+![VBox 18](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/8bb35f30-ff0c-4876-bb7c-e575f69055a0)
+
+![VBox 18 5](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/5bb56e33-c7ed-4f4d-bde3-9851850834c4)
+
+![VBox 19](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/5054eb32-2f3e-4d77-bcde-1b7cb2a642a1)
+
+
+## Creating a test client
+
+### Creating the VM
+
+![VBox 20](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/549a8b63-4278-4a54-b070-2ed16b6b7477)
+
+- For the client, I switched its NIC to connect only to the internal network. It will connect to the DC's internal NIC, get an IP assigned via DHCP and have internet connectivity thanks to NAT.
+
+![VBox 21](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/a1f6db6b-1878-412e-b763-eb30b1de403e)
+
+## Installing Windows 10
+
+![VBox 22](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/2093dbd2-21ea-4228-9deb-dd86698ec87a)
+
+![VBox 23](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/dd1a8de6-5e2b-4531-a162-ed0310ca061e)
+
+- I created a default user but later we will test if the users we added to the domain earlier can sign in into this client.
+
+![VBox 23](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/63da368c-b72b-4534-907a-1ba4ea718d7d)
+
+## Testing connectivity
+
+- I ran a simple ipconfig and ping commands to ensure the device was assigned an IP by the DC and that it was able to reach the internet.
+
+![VBox 24](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/e647421b-8d22-4152-bd5c-aa682827f9f4)
+
+![VBox 25](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/136fe0a5-5126-436e-a8ff-3dcf9f9e5095)
+
+![VBox 26](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/d0c08979-e4c9-4de2-89f3-299837d0339e)
+
+- I also made sure the client had been properly added to the domain.
+
+![VBox 29](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/017fec5d-00c7-4a44-bc2f-892a346e341a)
+
+## Login test
+
+- To finish it off, I switched back over to the client machine and attempted to log in using one of the random users we added to AD using the script. If everything has been properly configured, we should be able to log into any machine using any username that was added to the `mydomain.com` domain.
+
+![VBox 27](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/97ec97b4-fd20-4e65-a206-bed12dbc661f)
+
+![VBox 28](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/5b3f53ba-7d9c-49f6-9c15-fa981630f37b)
+
+
+### Conclusion
+
+This project gave me a much better understanding on how Active Directory functions within a private network. Creating something akin to a mini corporate network was good practice and it helped me visualize how connections flow in a private network. Since Active Directory is an industry standard it is important to understand how its components interact with each other, and this project was a great way of doing so. 
+
+I will be exploring more complex topologies and projects that involve AD as a way of becoming more familiar with it.
+
+
+
 
 
