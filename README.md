@@ -2,7 +2,7 @@
 
 ## Description
 
-For this lab I created a virtualized Active Directory enviroment using VirtualBox. The project consisted of two virtual machines: 
+For this lab I created a virtualized Active Directory environment using VirtualBox. The project consisted of two virtual machines: 
 
 The first virtual machine will be the Domain Controller (DC) and it will host Windows Server 19. It will also have two seperate NICs. One for connecting to the internet and one for internal connections. I also ran a PowerShell script to automate the process of adding 1k+ users to the domain. The services running on the server are:
 
