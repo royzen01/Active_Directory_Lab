@@ -2,9 +2,9 @@
 
 ## Description
 
-For this lab I created a virtualized Active Directory environment using VirtualBox. The project consisted of two virtual machines: 
+For this lab, I created a virtualized Active Directory environment using VirtualBox. The project consisted of two virtual machines: 
 
-The first virtual machine will be the Domain Controller (DC) and it will host Windows Server 19. It will also have two seperate NICs. One for connecting to the internet and one for internal connections. I also ran a PowerShell script to automate the process of adding 1k+ users to the domain. The services running on the server are:
+The first virtual machine will be the Domain Controller (DC) and it will host Windows Server 19. It will also have two separate NICs. One for connecting to the internet and one for internal connections. I also ran a PowerShell script to automate the process of adding 1k+ users to the domain. The services running on the server are:
 
 * <b> AD DS: </b> I installed Active Directory for user management
 * <b> NAT: </b> NAT was used for connectivity to the clients as well as providing said clients access to the internet.
@@ -20,7 +20,7 @@ The second virtual machine will run Windows 10. This VM will serve as a test cli
 
 ### Creating the VM
 
-- Created a VM and selected `Other Windows 64 (64-bit)` as the version. I also gave it the appropriate amount of resources. This can very depending on the host computer's resources.
+- Created a VM and selected `Other Windows 64 (64-bit)` as the version. I also gave it the appropriate amount of resources. This can vary depending on the host computer's resources.
 
 ![VBox 1](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/b1fd40ce-5af1-4c9b-a8d9-752c8f7fe450)
 
@@ -32,11 +32,11 @@ The second virtual machine will run Windows 10. This VM will serve as a test cli
 
 ### Installing Windows Server 2019
 
-- I booted up the newly created DC VM, attached the Windows Server 2019 ISO and went through the installation process
+- I booted up the newly created DC VM, attached the Windows Server 2019 ISO, and went through the installation process
 
 ![VBox 4](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/bde013fa-92f1-477f-bf08-3949523867dc)
 
-- I made sure to install one of the `Desktop Experience` edition since the others don't have a GUI and are just a command line.
+- I made sure to install one of the `Desktop Experience` editions since the others don't have a GUI and are just a command line.
   
 ![VBox 5](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/de09e884-f23e-4786-9465-8301e365c6ae)
 
@@ -48,13 +48,13 @@ The second virtual machine will run Windows 10. This VM will serve as a test cli
 - To begin the process of IP Addressing I navigated to `Network Connections` from within the `Control Panel`.
 - Since this VM has two different NICs I found the internal one and named it `INTERNAL` to make it easy to distinguish.
 - I then modified its TCP/IPv4 settings to the following.
-- <b>Note:</b> this NIC did not have a Default gateway because the DC itself will act as the Default Gateway for the private network. It will route traffic from the clients, through the internal NIC and then through the public facing NIC for internet connectivity.
+- <b>Note:</b> This NIC did not have a Default gateway because the DC itself will act as the Default Gateway for the private network. It will route traffic from the clients, through the internal NIC and then through the public facing NIC for internet connectivity.
 
 ![VBox 6](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/783d34dc-9e48-43ec-a0c1-74ba20148892)
 
 ### Installing Active Directory 
 
-- Using Server Manager I installed the `Active Direcotry Domain Services` role.
+- Using Server Manager I installed the `Active Directory Domain Services` role.
 
 ![VBox 7](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/93819c4c-5d44-4a95-968c-56277866e816)
 
@@ -63,7 +63,7 @@ The second virtual machine will run Windows 10. This VM will serve as a test cli
 ![VBox 8](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/1262676c-767a-47e9-8431-55ab9a9e406a)
 
 - Once AD DS was set up, I created a new `Organizational Unit` named `_ADMINS`.
-- Here, I created an adminstrator account for myself (up to this point we had been using the default Administrator account).
+- Here, I created an administrator account for myself (up to this point we had been using the default Administrator account).
 - I switched over to that account for the remainder of the project.
 
 ![VBox 9](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/b4f81dba-7012-4919-8d02-2b2f0b9ac515)
@@ -71,7 +71,7 @@ The second virtual machine will run Windows 10. This VM will serve as a test cli
 ### Setting up RAS/NAT
 
 - Back in Server Manager, I added the `Remote Access` role and enabled `Routing` and `Remote Access Server (RAS)` on it.
-- The goal with installing NAT is to allow the clients to sit on a private network but have internet access via the DC.
+- The goal of installing NAT is to allow the clients to sit on a private network but have internet access via the DC.
 
 ![VBox 10](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/088e6db0-8575-405e-8f59-f938aa1fd023)
 
@@ -79,18 +79,18 @@ The second virtual machine will run Windows 10. This VM will serve as a test cli
   
 ![VBox 11](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/ffb2c3f4-76a4-4352-8905-668311b75c3a)
 
-- I selected the public facing NIC to allow internet conectivity.
+- I selected the public-facing NIC to allow internet connectivity.
 
 ![VBox 12](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/1ae18d80-fa89-44b9-a26f-3d5275ae7413)
 
 ### Setting up DHCP
 
-- Back in Server Manager, I added installed a `DHCP Server` role.
+- Back in Server Manager, I added a `DHCP Server` role.
 
 ![VBox 13](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/a35aa082-1cfe-4a67-8b21-6ea271623a2e)
 
 - I created a new scope for mydomain.com between `172.16.0.100-200`
-- I set the Default Gateway as `172.16.0.1`. Again, this is the DC's IP Address and the DC will also server as the Default Gateway.
+- I set the Default Gateway as `172.16.0.1`. Again, this is the DC's IP Address and the DC will also serve as the Default Gateway.
 
 ![VBox 14](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/0fe5ac17-794c-492a-bfc9-357656bcb924)
 
@@ -117,7 +117,7 @@ The second virtual machine will run Windows 10. This VM will serve as a test cli
 
 ![VBox 20](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/549a8b63-4278-4a54-b070-2ed16b6b7477)
 
-- For the client, I switched its NIC to connect only to the internal network. It will connect to the DC's internal NIC, get an IP assigned via DHCP and have internet connectivity thanks to NAT.
+- For the client, I switched its NIC to connect only to the internal network. It will connect to the DC's internal NIC, get an IP assigned via DHCP, and have internet connectivity thanks to NAT.
 
 ![VBox 21](https://github.com/royzen01/Active_Directory_Lab/assets/13005742/a1f6db6b-1878-412e-b763-eb30b1de403e)
 
@@ -156,7 +156,7 @@ The second virtual machine will run Windows 10. This VM will serve as a test cli
 
 ### Conclusion
 
-This project gave me a much better understanding on how Active Directory functions within a private network. Creating something akin to a mini corporate network was good practice and it helped me visualize how connections flow in a private network. Since Active Directory is an industry standard it is important to understand how its components interact with each other, and this project was a great way of doing so. 
+This project gave me a much better understanding of how Active Directory functions within a private network. Creating something akin to a mini corporate network was good practice and it helped me visualize how connections flow in a private network. Since Active Directory is an industry standard it is important to understand how its components interact with each other, and this project was a great way of doing so. 
 
 I will be exploring more complex topologies and projects that involve AD as a way of becoming more familiar with it.
 
